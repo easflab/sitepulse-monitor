@@ -6,6 +6,8 @@ function saveSites() {
 
 async function checkSite(site) {
     const start = Date.now();
+    const wasOnline = site.status === 'up';
+    
     try {
         await fetch(site.url, { mode: 'no-cors', cache: 'no-cache' });
         const time = Date.now() - start;
@@ -23,8 +25,13 @@ async function checkSite(site) {
         site.lastCheck = new Date().toISOString();
         site.history = site.history || [];
         site.history.push({ time: Date.now(), responseTime: site.responseTime, online: false });
+        
+        if (wasOnline) {
+            sendNotification(site);
+        }
     }
     saveSites();
+    sortSites();
     renderSites();
 }
 
@@ -45,6 +52,7 @@ function addSite() {
 
     urlInput.value = '';
     saveSites();
+    sortSites();
     renderSites();
     checkSite(sites[sites.length - 1]);
 }
@@ -126,9 +134,86 @@ function exportData() {
     link.click();
 }
 
+// ==================== NOVAS FUNCIONALIDADES ====================
+
+function reloadAll() {
+    const btn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Atualizar Tudo'));
+    if (btn) {
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Atualizando...`;
+        btn.disabled = true;
+    }
+
+    let completed = 0;
+    sites.forEach(site => {
+        checkSite(site).then(() => {
+            completed++;
+            if (completed === sites.length && btn) {
+                btn.innerHTML = `<i class="fas fa-sync-alt"></i> Atualizar Tudo`;
+                btn.disabled = false;
+            }
+        });
+    });
+}
+
+function clearAllHistory() {
+    if (confirm("Limpar histórico de todos os sites?")) {
+        sites.forEach(site => site.history = []);
+        saveSites();
+        renderSites();
+        alert("Histórico limpo com sucesso!");
+    }
+}
+
+function sendNotification(site) {
+    if (Notification.permission === "granted") {
+        new Notification("⚠️ SitePulse - Site Offline", {
+            body: `${site.url} está fora do ar!`,
+            icon: "https://cdn-icons-png.flaticon.com/512/1827/1827342.png"
+        });
+    }
+}
+
+async function requestNotificationPermission() {
+    if (Notification.permission === "default") {
+        await Notification.requestPermission();
+    }
+}
+
+function toggleTheme() {
+    document.documentElement.classList.toggle('light-mode');
+    const isLight = document.documentElement.classList.contains('light-mode');
+    const icon = document.getElementById('themeIcon');
+    if (icon) {
+        icon.classList.toggle('fa-moon', !isLight);
+        icon.classList.toggle('fa-sun', isLight);
+    }
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+function sortSites() {
+    sites.sort((a, b) => {
+        if (a.status === 'up' && b.status !== 'up') return -1;
+        if (a.status !== 'up' && b.status === 'up') return 1;
+        return 0;
+    });
+}
+
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
     renderSites();
+    sortSites();
+    
+    // Carregar tema
+    if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light-mode');
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    // Permissão de notificação
+    requestNotificationPermission();
+    
+    // Atualização automática
     setInterval(() => {
         sites.forEach(site => checkSite(site));
     }, 15000);
