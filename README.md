@@ -8,4 +8,6 @@ Monitor simples, bonito e funcional para acompanhar seus sites.
 2. Adicione as URLs dos sites
 3. O sistema verifica automaticamente a cada 15 segundos
 
+
+
 Feito com HTML, Tailwind CSS e Chart.js.
