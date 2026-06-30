@@ -4,65 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SitePulse - Monitor de Sites</title>
+    
+    <!-- Performance: Preconnect -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen">
-    <div class="max-w-7xl mx-auto p-4 md:p-6"></div>
-<header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-    <div class="flex items-center gap-4">
-        <i class="fas fa-pulse text-emerald-500 text-4xl"></i>
-        <div>
-            <h1 class="text-3xl md:text-4xl font-bold">SitePulse</h1>
-            <p class="text-gray-400 text-sm md:text-base">Monitoramento Profissional</p>
-        </div>
-    </div>
-    
-    <div class="flex flex-wrap gap-3">
-        <a href="status.html" target="_blank"
-           class="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-xl transition font-medium text-sm">
-            <i class="fas fa-chart-bar"></i> 
-            Ver Status Page
-        </a>
+    <div class="max-w-7xl mx-auto p-4 md:p-6">
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div class="flex items-center gap-4">
+                <i class="fas fa-pulse text-emerald-500 text-4xl"></i>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold">SitePulse</h1>
+                    <p class="text-gray-400">Monitoramento Profissional</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-3">
+                <a href="status.html" target="_blank"
+                   class="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-xl transition font-medium">
+                    <i class="fas fa-chart-bar"></i> Ver Status Page
+                </a>
 
-        <button onclick="toggleTheme()" 
-                class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-xl transition" title="Alternar Tema">
-            <i class="fas fa-moon" id="themeIcon"></i>
-        </button>
-        
-        <button onclick="reloadAll()" 
-                class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl transition text-sm">
-            <i class="fas fa-sync-alt"></i> 
-            <span class="hidden md:inline">Atualizar Tudo</span>
-        </button>
-        
-        <button onclick="clearAllHistory()" 
-                class="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 px-5 py-3 rounded-xl transition text-sm">
-            <i class="fas fa-trash"></i>
-        </button>
-        
-        <button onclick="exportData()" 
-                class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-xl transition text-sm">
-            <i class="fas fa-download"></i>
-        </button>
-    </div>
-</header>
+                <button onclick="toggleTheme()" 
+                        class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-xl transition">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                
+                <button onclick="reloadAll()" 
+                        class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl transition">
+                    <i class="fas fa-sync-alt"></i> Atualizar Tudo
+                </button>
+                
+                <button onclick="clearAllHistory()" 
+                        class="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 px-5 py-3 rounded-xl transition">
+                    <i class="fas fa-trash"></i>
+                </button>
+                
+                <button onclick="exportData()" 
+                        class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-xl transition">
+                    <i class="fas fa-download"></i> Exportar
+                </button>
+            </div>
+        </header>
 
-        <div class="bg-gray-900 rounded-3xl p-8 mb-10">
+        <div class="bg-gray-900 rounded-3xl p-6 md:p-8 mb-10">
             <div class="flex gap-4">
                 <input type="text" id="urlInput" 
                        class="flex-1 bg-gray-800 border border-gray-700 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:border-emerald-500"
                        placeholder="https://exemplo.com">
                 <button onclick="addSite()" 
-                        class="bg-emerald-600 hover:bg-emerald-700 px-10 rounded-2xl font-semibold text-lg transition">
-                    <i class="fas fa-plus"></i> Adicionar Site
+                        class="bg-emerald-600 hover:bg-emerald-700 px-8 md:px-10 rounded-2xl font-semibold text-lg transition">
+                    <i class="fas fa-plus"></i> Adicionar
                 </button>
             </div>
         </div>
 
-        <div id="sitesContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+        <div id="sitesContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6"></div>
     </div>
 
     <script src="js/charts.js"></script>
