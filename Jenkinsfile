@@ -1,32 +1,44 @@
 pipeline {
     agent any
     
+    environment {
+        GITHUB_TOKEN = credentials('github-token')
+    }
+    
     stages {
         stage('Checkout') {
             steps {
-                echo '✅ Projeto clonado com sucesso'
+                echo '✅ Checkout realizado'
             }
         }
         
         stage('Testes') {
             steps {
-                echo '🔍 Verificando arquivos do SitePulse...'
+                echo '🔍 Verificando projeto...'
                 sh 'ls -la'
                 echo '✅ Testes concluídos'
             }
         }
         
-        stage('Deploy') {
+        stage('Deploy GitHub Pages') {
             steps {
-                echo '🚀 Deploy simulado para GitHub Pages'
-                echo '✅ Deploy finalizado (simulado)'
+                echo '🚀 Iniciando deploy para GitHub Pages...'
+                sh '''
+                    git config user.name "Jenkins CI"
+                    git config user.email "jenkins@lab.com"
+                    git push --force https://${GITHUB_TOKEN}@github.com/easflab/sitepulse-monitor.git HEAD:gh-pages
+                '''
+                echo '✅ Deploy realizado com sucesso!'
             }
         }
     }
     
     post {
-        always {
-            echo 'Pipeline finalizada'
+        success {
+            echo '🎉 Pipeline completada com sucesso!'
+        }
+        failure {
+            echo '❌ Pipeline falhou'
         }
     }
 }
