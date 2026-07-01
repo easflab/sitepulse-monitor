@@ -10,4 +10,5 @@ Monitor simples, bonito e funcional para acompanhar seus sites.
 
 
 
+
 Feito com HTML, Tailwind CSS e Chart.js.
