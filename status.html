@@ -34,57 +34,34 @@
         </div>
     </div>
 
-        <script>
+            <script>
         let sites = JSON.parse(localStorage.getItem('sitepulse_sites')) || [];
-        let updateInterval = null;
+        console.log('Sites carregados:', sites); // Debug
 
         function updateStatusPage() {
             const container = document.getElementById('servicesList');
             container.innerHTML = '';
 
             if (sites.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-gray-400">
-                        Nenhum site monitorado ainda.<br>
-                        <a href="index.html" class="text-purple-400 hover:underline">Vá para a página principal e adicione sites</a>
-                    </div>`;
+                container.innerHTML = `<div class="text-center py-12 text-gray-400">Nenhum site encontrado. Adicione na página principal.</div>`;
                 return;
             }
 
             sites.forEach(site => {
-                const uptime = site.history && site.history.length > 0 
-                    ? Math.round((site.history.filter(h => h.online).length / site.history.length) * 100) : 99;
-                const isUp = site.status === 'up' || site.status === 'unknown';
+                const uptime = 99; // Simplificado para teste
+                const isUp = true;
 
                 const item = document.createElement('div');
-                item.className = "flex flex-col md:flex-row md:items-center justify-between bg-white/5 hover:bg-white/10 p-5 rounded-2xl transition-all border border-white/10";
+                item.className = "p-5 bg-white/5 rounded-2xl";
                 item.innerHTML = `
-                    <div class="flex-1 mb-4 md:mb-0">
-                        <p class="font-medium text-base break-all">${site.url}</p>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <div class="text-right">
-                            <p class="text-emerald-400 font-mono text-xl font-semibold">${uptime}%</p>
-                            <div class="w-40 h-1.5 bg-gray-700 rounded-full overflow-hidden mt-1">
-                                <div class="status-bar" style="width: ${uptime}%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 min-w-[90px]">
-                            <div class="w-3.5 h-3.5 rounded-full ${isUp ? 'bg-emerald-500 ring-2 ring-emerald-500/30 animate-pulse' : 'bg-red-500'}"></div>
-                            <span class="font-medium ${isUp ? 'text-emerald-400' : 'text-red-400'}">${isUp ? 'Operational' : 'Down'}</span>
-                        </div>
-                    </div>
+                    <p class="font-medium">${site.url}</p>
+                    <p class="text-emerald-400">${uptime}% Operational</p>
                 `;
                 container.appendChild(item);
             });
-
-            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('pt-BR');
         }
 
-        window.onload = () => {
-            updateStatusPage();
-            updateInterval = setInterval(updateStatusPage, 10000);
-        };
-    </script>>
+        window.onload = updateStatusPage;
+    </script>
 </body>
 </html>
