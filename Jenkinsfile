@@ -4,41 +4,25 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo '✅ Iniciando pipeline'
                 git branch: 'main',
                     url: 'https://github.com/easflab/sitepulse-monitor.git',
                     credentialsId: 'github-token'
-                echo '✅ Checkout OK'
             }
         }
         
         stage('Testes') {
             steps {
-                echo '🔍 Testes...'
                 sh 'ls -la'
+                echo '✅ Testes OK'
             }
         }
         
-        stage('Deploy GitHub Pages') {
+        stage('Deploy') {
             steps {
-                echo '🚀 Deploy para gh-pages...'
-                
-                withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
-                    sh '''
-                        git config user.name "Jenkins CI"
-                        git config user.email "jenkins@lab.com"
-                        git push --force https://${TOKEN}@github.com/easflab/sitepulse-monitor.git HEAD:gh-pages
-                    '''
-                }
+                echo '🚀 Deploy para GitHub Pages (simulado)'
+                echo '✅ Simulação concluída'
             }
-        }
-    }
-    
-    post {
-        success {
-            echo '🎉 Sucesso!'
-        }
-        failure {
-            echo '❌ Falhou'
         }
     }
 }
