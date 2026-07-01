@@ -15,43 +15,23 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen">
-    <div class="max-w-7xl mx-auto p-4 md:p-6">
-        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-            <div class="flex items-center gap-4">
-                <i class="fas fa-pulse text-emerald-500 text-4xl"></i>
-                <div>
-                    <h1 class="text-3xl md:text-4xl font-bold">SitePulse</h1>
-                    <p class="text-gray-400">Monitoramento Profissional</p>
-                </div>
-            </div>
-            
-            <div class="flex flex-wrap gap-3">
-                <a href="status.html" target="_blank"
-                   class="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-xl transition font-medium">
-                    <i class="fas fa-chart-bar"></i> Ver Status Page
-                </a>
-
-                <button onclick="toggleTheme()" 
-                        class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-xl transition">
-                    <i class="fas fa-moon" id="themeIcon"></i>
-                </button>
-                
-                <button onclick="reloadAll()" 
-                        class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl transition">
-                    <i class="fas fa-sync-alt"></i> Atualizar Tudo
-                </button>
-                
-                <button onclick="clearAllHistory()" 
-                        class="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 px-5 py-3 rounded-xl transition">
-                    <i class="fas fa-trash"></i>
-                </button>
-                
-                <button onclick="exportData()" 
-                        class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-xl transition">
-                    <i class="fas fa-download"></i> Exportar
-                </button>
-            </div>
-        </header>
+    <div class="max-w-7xl mx-auto p-4 sm:p-6"></div>
+        <<header class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 lg:mb-10">
+    <div class="flex items-center gap-4">
+        <i class="fas fa-pulse text-emerald-500 text-3xl lg:text-4xl"></i>
+        <div>
+            <h1 class="text-2xl lg:text-4xl font-bold">SitePulse</h1>
+            <p class="text-gray-400 text-sm lg:text-base">Monitoramento Profissional</p>
+        </div>
+    </div>
+    
+    <div class="flex flex-wrap gap-2 sm:gap-3">
+        <a href="status.html" target="_blank" class="flex-1 sm:flex-none text-center sm:text-left items-center gap-2 bg-purple-600 hover:bg-purple-700 px-4 sm:px-5 py-3 rounded-xl transition text-sm font-medium">
+            <i class="fas fa-chart-bar"></i> Status Page
+        </a>
+        <!-- outros botões -->
+    </div>
+</header>
 
         <div class="bg-gray-900 rounded-3xl p-6 md:p-8 mb-10">
             <div class="flex gap-4">
@@ -65,7 +45,7 @@
             </div>
         </div>
 
-        <div id="sitesContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6"></div>
+        <div id="sitesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
     </div>
 
     <script src="js/charts.js"></script>
