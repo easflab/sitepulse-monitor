@@ -1,10 +1,6 @@
 pipeline {
     agent any
     
-    environment {
-        GITHUB_TOKEN = credentials('github-token')
-    }
-    
     stages {
         stage('Checkout') {
             steps {
@@ -14,21 +10,22 @@ pipeline {
         
         stage('Testes') {
             steps {
-                echo '🔍 Verificando projeto...'
+                echo '🔍 Verificando arquivos...'
                 sh 'ls -la'
-                echo '✅ Testes concluídos'
             }
         }
         
         stage('Deploy GitHub Pages') {
             steps {
-                echo '🚀 Iniciando deploy para GitHub Pages...'
-                sh '''
-                    git config user.name "Jenkins CI"
-                    git config user.email "jenkins@lab.com"
-                    git push --force https://${GITHUB_TOKEN}@github.com/easflab/sitepulse-monitor.git HEAD:gh-pages
-                '''
-                echo '✅ Deploy realizado com sucesso!'
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    echo '🚀 Iniciando deploy para GitHub Pages...'
+                    sh '''
+                        git config user.name "Jenkins CI"
+                        git config user.email "jenkins@lab.com"
+                        git push --force https://${GITHUB_TOKEN}@github.com/easflab/sitepulse-monitor.git HEAD:gh-pages
+                    '''
+                    echo '✅ Deploy realizado com sucesso!'
+                }
             }
         }
     }
