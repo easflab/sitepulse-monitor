@@ -19,9 +19,28 @@
                     <p class="text-emerald-400/80 text-sm">Monitoramento em Tempo Real</p>
                 </div>
             </div>
-            <button onclick="toggleTheme()" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-2xl transition">
-                <i class="fas fa-moon" id="themeIcon"></i>
-            </button>
+            
+            <div class="flex flex-wrap gap-3">
+                <a href="status.html" target="_blank" class="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-2xl transition font-medium">
+                    <i class="fas fa-chart-bar"></i> Status Page
+                </a>
+                
+                <button onclick="toggleTheme()" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-2xl transition">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                
+                <button onclick="reloadAll()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-2xl transition">
+                    <i class="fas fa-sync-alt"></i> Atualizar Tudo
+                </button>
+                
+                <button onclick="clearAllHistory()" class="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 px-5 py-3 rounded-2xl transition">
+                    <i class="fas fa-trash"></i> Limpar Histórico
+                </button>
+                
+                <button onclick="exportData()" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-2xl transition">
+                    <i class="fas fa-download"></i> Exportar
+                </button>
+            </div>
         </header>
 
         <div class="bg-gray-900/50 border border-white/10 rounded-3xl p-8 mb-10">
