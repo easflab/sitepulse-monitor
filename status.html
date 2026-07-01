@@ -43,7 +43,11 @@
             container.innerHTML = '';
 
             if (sites.length === 0) {
-                container.innerHTML = `<div class="text-center py-12 text-gray-400">Nenhum site monitorado.</div>`;
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        Nenhum site monitorado ainda.<br>
+                        <a href="index.html" class="text-purple-400 hover:underline">Vá para a página principal e adicione sites</a>
+                    </div>`;
                 return;
             }
 
