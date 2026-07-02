@@ -1,0 +1,23 @@
+{
+  "name": "sitepulse-monitor",
+  "version": "1.0.0",
+  "description": "Monitor de sites responsivo",
+  "main": "sw.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easflab/sitepulse-monitor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/easflab/sitepulse-monitor/issues"
+  },
+  "homepage": "https://github.com/easflab/sitepulse-monitor#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
