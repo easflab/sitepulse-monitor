@@ -144,5 +144,23 @@
             setInterval(updateStatusPage, 15000);
         };
     </script>
+    <footer class="mt-16 py-8 border-t border-white/10 text-center text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto px-6">
+        Projeto PulseMonitor - Versão 1.0.0<br>
+        IP de acesso: <span id="visitorIP">Carregando...</span>
+    </div>
+</footer>
+
+<script>
+    // Pegar IP do visitante
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('visitorIP').textContent = data.ip;
+        })
+        .catch(() => {
+            document.getElementById('visitorIP').textContent = 'Indisponível';
+        });
+</script>
 </body>
 </html>
