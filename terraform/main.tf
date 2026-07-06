@@ -1,3 +1,14 @@
+# Entre na pasta do projeto
+cd ~/sitepulse-monitor
+
+# Crie a pasta terraform
+mkdir terraform
+
+# Entre na pasta
+cd terraform
+
+# Crie o arquivo main.tf
+cat > main.tf << EOF
 terraform {
   required_providers {
     azurerm = {
@@ -23,7 +34,6 @@ resource "azurerm_static_web_app" "app" {
   sku_size            = "Free"
   sku_tier            = "Free"
 
-  # Integração com GitHub
   github_action_configuration {
     repo_url     = "https://github.com/easflab/sitepulse-monitor"
     branch       = "main"
@@ -34,3 +44,4 @@ resource "azurerm_static_web_app" "app" {
 output "static_web_app_url" {
   value = azurerm_static_web_app.app.default_host_name
 }
+EOF
