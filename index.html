@@ -40,6 +40,9 @@
                 <button onclick="exportData()" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-3 rounded-2xl transition">
                     <i class="fas fa-download"></i> Exportar
                 </button>
+                <button onclick="showAbout()" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-2xl transition">
+                    <i class="fas fa-info-circle"></i> Sobre
+</button>
             </div>
         </header>
 
@@ -60,5 +63,22 @@
 
     <script src="js/charts.js"></script>
     <script src="js/app.js"></script>
+    <script>
+    function showAbout() {
+        alert(`PulseMonitor - Monitor de Sites
+
+                Desenvolvido por: Elcio Antonio da Silva Filho
+
+                Modelo: Site de monitoramento em tempo real com:
+                - Interface responsiva
+                - Gráficos interativos
+                - Notificações
+                - CI/CD com Jenkins e GitHub Actions
+                - Deploy automático para GitHub Pages
+
+                Versão: 1.0.0
+                Data: Julho 2026`);
+    }
+</script>
 </body>
 </html>
