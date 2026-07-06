@@ -1,22 +1,54 @@
 {
   "name": "PulseMonitor",
   "short_name": "PulseMonitor",
-  "description": "Monitor de sites em tempo real",
+  "description": "Monitor de sites em tempo real com gráficos, notificações e interface responsiva",
   "start_url": "/index.html",
   "display": "standalone",
+  "display_override": ["window-controls-overlay"],
   "background_color": "#0f172a",
   "theme_color": "#10b981",
   "orientation": "portrait-primary",
+  "id": "/index.html",
+  "scope": "/",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities", "monitoring"],
   "icons": [
     {
       "src": "icons/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icons/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/desktop-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "PulseMonitor no Desktop"
+    },
+    {
+      "src": "screenshots/mobile-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "PulseMonitor no Celular"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Status Page",
+      "url": "/status.html",
+      "description": "Ver página de status"
+    }
+  ],
+  "prefer_related_applications": false
 }
