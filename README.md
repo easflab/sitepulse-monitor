@@ -43,6 +43,12 @@ Um monitor moderno e profissional de disponibilidade de sites com interface resp
 - Service Worker
 - Jenkins + GitHub Actions
 
+
+
+
+
+
+
 ---
 
 Made with ❤️ by [Seu Nome]
