@@ -169,7 +169,17 @@ function reloadAll() { /* ... mesma função anterior ... */ }
 function clearAllHistory() { /* ... */ }
 function sendNotification(site) { /* ... */ }
 async function requestNotificationPermission() { /* ... */ }
-function toggleTheme() { /* ... */ }
+function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.getElementById('themeIcon');
+    const isLight = html.classList.toggle('light-mode');
+
+    if (icon) {
+        icon.classList.replace(isLight ? 'fa-moon' : 'fa-sun', isLight ? 'fa-sun' : 'fa-moon');
+    }
+
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
 function sortSites() { /* ... */ }
 function exportData() { /* ... */ }
 
